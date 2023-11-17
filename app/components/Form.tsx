@@ -1,6 +1,6 @@
 'use client'
 
-const Form = ({setInputText, todos, setTodos, inputText}) => {
+const Form = ({todos, setTodos, inputText, setInputText, setStatus}) => {
 
     const inputTextHandler = ( e:any ) => {
         setInputText(e.target.value);
@@ -13,16 +13,19 @@ const Form = ({setInputText, todos, setTodos, inputText}) => {
         ]);
         setInputText("");
     }
+    const statusHandler = (e) => {
+        setStatus(e.target.value);
+    }
     
     return (
         <form>
             <input type="text" className="todo-input" placeholder="Create a new todo..." onChange={inputTextHandler} value={inputText} />
-            <button type="submit" onClick={submitTodoHandler}>Add</button>
+            <button type="submit" onClick={submitTodoHandler} className="todo-button">Add</button>
             <div className="select">
-                <select name="todos" className="filter-todos" title="filter">
+                <select onChange={statusHandler} name="todos" className="filter-todo">
                     <option value="all">All</option>
-                    <option value="active">Active</option>
-                    <option value="completed">completed</option>
+                    <option value="completed">Completed</option>
+                    <option value="uncompleted">Incomplete</option>
                 </select>
             </div>
         </form>
